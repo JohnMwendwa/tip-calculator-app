@@ -31,6 +31,11 @@ tipBtns.forEach((btn) => {
     // Reset tip value from custom tip input field
     tipInput.value = "";
     tip = parseFloat(btn.textContent.split("%")[0]);
+
+    // Calculate tip amount when tip button is clicked
+    if (billInput.value > 0 && peopleInput.value > 0) {
+      calculateTip();
+    }
   });
 });
 
@@ -38,7 +43,17 @@ tipBtns.forEach((btn) => {
 tipInput.addEventListener("keyup", () => {
   // Remove active class from tip buttons
   tipBtns.forEach((btn) => btn.classList.remove("active"));
-  tip = parseFloat(tipInput.value);
+
+  // Update tip amount when custom tip input field is not empty
+  if (tipInput.value < 0) {
+    tipInput.style.outline = "2px solid var(--soft-red)";
+    tip = 0;
+  } else if (!tipInput.value) {
+    tip = 0;
+  } else {
+    tip = parseFloat(tipInput.value);
+    tipInput.style.outline = "none";
+  }
 });
 
 // Calculate tip amount
@@ -61,6 +76,9 @@ form.addEventListener("keyup", () => {
   if (!peopleInput.value) {
     peopleInput.style.outline = "2px solid var(--soft-red)";
     peopleError.textContent = "Can't be zero";
+  } else if (peopleInput.value < 0) {
+    peopleInput.style.outline = "2px solid var(--soft-red)";
+    peopleError.textContent = "Can't be negative";
   } else {
     peopleInput.style.outline = "none";
     peopleError.textContent = "";
@@ -69,17 +87,33 @@ form.addEventListener("keyup", () => {
   if (!billInput.value) {
     billInput.style.outline = "2px solid var(--soft-red)";
     billError.textContent = "Can't be zero";
+  } else if (billInput.value < 0) {
+    billInput.style.outline = "2px solid var(--soft-red)";
+    billError.textContent = "Can't be negative";
   } else {
     billInput.style.outline = "none";
     billError.textContent = "";
   }
 
-  if (billInput.value && peopleInput.value) {
+  // Set display to zero when bill and people input fields are empty
+  if (
+    !billInput.value ||
+    billInput.value < 0 ||
+    !peopleInput.value ||
+    peopleInput.value < 0 ||
+    tipInput.value < 0
+  ) {
+    tipAmountDisplay.textContent = "$0.00";
+    totalAmountDisplay.textContent = "$0.00";
+  }
+
+  // Calculate tip amount when bill and people input fields are not empty
+  if (billInput.value > 0 && peopleInput.value > 0 && tipInput.value >= 0) {
     calculateTip();
   }
 });
 
 // Reset form when reset button is clicked
 resetBtn.addEventListener("click", () => {
-  form.reset();
+  window.location.reload();
 });
