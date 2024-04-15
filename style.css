@@ -1,0 +1,301 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Primary */
+  --strong-cyan: hsl(172, 67%, 45%);
+
+  /* Neutral */
+  --very-dark-cyan: hsl(183, 100%, 15%);
+  --dark-grayish-cyan: hsl(186, 14%, 43%);
+  --grayish-cyan: hsl(184, 14%, 56%);
+  --light-grayish-cyan: hsl(185, 41%, 84%);
+  --very-light-grayish-cyan: hsl(189, 41%, 97%);
+  --soft-red: hsl(0, 100%, 74%);
+  --white: hsl(0, 0%, 100%);
+}
+
+body {
+  font-family: "Space Mono", monospace;
+  font-weight: 700;
+  font-style: normal;
+  min-height: 100vh;
+  background-color: var(--light-grayish-cyan);
+}
+
+input {
+  font-size: 1.5rem;
+  font-family: "Space Mono", monospace;
+}
+
+/* Remve arrows  from number input*/
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(transparent, var(--dark-grayish-cyan));
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: var(--very-light-grayish-cyan);
+  border-radius: 10px;
+}
+
+/* Main Area */
+main {
+  display: grid;
+  place-content: center;
+  min-height: 100vh;
+  padding-top: 3rem;
+}
+
+@media screen and (min-width: 640px) {
+  main {
+    padding: 2rem;
+  }
+}
+
+main > h1 {
+  color: var(--dark-grayish-cyan);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.5rem;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* Card */
+.card {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  background-color: var(--white);
+  border-radius: 1.5rem 1.5rem 0 0;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  padding: 2rem;
+  margin-top: 3rem;
+  max-width: 60rem;
+}
+
+@media screen and (min-width: 640px) {
+  .card {
+    border-radius: 1.5rem;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .card {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Bill Input */
+
+@media screen and (min-width: 768px) {
+  .bill__input {
+    padding: 1rem;
+  }
+}
+
+label {
+  color: var(--grayish-cyan);
+}
+
+.bill__input .wrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.bill__input--tip label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+#bill,
+#people {
+  width: 100%;
+  padding: 0.1rem 1rem;
+  border: 1px solid transparent;
+  background-color: var(--very-light-grayish-cyan);
+  border-radius: 0.35rem;
+  text-align: end;
+  font-weight: 900;
+  background-repeat: no-repeat;
+  background-position: 1rem center;
+  cursor: pointer;
+}
+
+#bill {
+  background-image: url("images/icon-dollar.svg");
+}
+
+#people {
+  background-image: url("images/icon-person.svg");
+}
+
+#bill:hover,
+#bill:focus-visible,
+#people:hover,
+#people:focus-visible {
+  outline: 2px solid var(--strong-cyan);
+}
+
+.bill__input form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.tip__buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media screen and (min-width: 640px) {
+  .tip__buttons {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.tip__btn {
+  padding: 0.35rem 1rem;
+  border: transparent;
+  border-radius: 0.35rem;
+  background-color: var(--very-dark-cyan);
+  color: var(--white);
+  font-weight: 700;
+  font-family: "Space Mono", monospace;
+  font-size: 1.5rem;
+  letter-spacing: 0.02rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.tip__btn.active {
+  background-color: var(--strong-cyan);
+  color: var(--very-dark-cyan);
+}
+
+.tip__btn:hover {
+  background-color: var(--strong-cyan);
+  color: var(--very-dark-cyan);
+}
+
+#tip {
+  padding: 0 1rem;
+  width: 100%;
+  border: none;
+  text-align: end;
+  border-radius: 0.35rem;
+  font-weight: 700;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--very-dark-cyan);
+  background-color: var(--very-light-grayish-cyan);
+}
+
+@media screen and (min-width: 768px) {
+  .bill__input {
+    padding: 1rem;
+  }
+}
+
+#tip::placeholder {
+  text-align: center;
+  color: var(--dark-grayish-cyan);
+}
+
+#tip:focus-visible,
+#tip:hover {
+  outline: 2px solid var(--strong-cyan);
+}
+
+.error__bill,
+.error__people {
+  color: var(--soft-red);
+}
+
+/* Results */
+
+.bill__results {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background-color: var(--very-dark-cyan);
+  padding: 3rem 2.5rem;
+  border-radius: 0.75rem;
+  color: var(--white);
+}
+
+.bill__results h2 {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.bill__results h2 > span {
+  color: var(--grayish-cyan);
+}
+
+.bill__results h3 {
+  color: var(--strong-cyan);
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+@media screen and (min-width: 768px) {
+  .bill__results h3 {
+    font-size: 3rem;
+  }
+}
+
+.bill__results .wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.tip__amount,
+.total__amount {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+
+.bill__results button {
+  margin-top: auto;
+  width: 100%;
+  background-color: var(--strong-cyan);
+  padding: 0.75rem 1rem;
+  border-radius: 0.35rem;
+  border: transparent;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 900;
+  color: var(--dark-grayish-cyan);
+  transition: all 0.3s ease-in-out;
+}
+
+.bill__results button:hover {
+  background-color: var(--light-grayish-cyan);
+}
